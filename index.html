@@ -19,12 +19,30 @@
     </nav>
 
     <div class="jumbotron">
-        <h1 class="display-4">Let's play Hangman!</h1>
-        <p class="lead" id="directions">This is where directions go</p>
-        <hr class="my-4">
-        <p>Letters youved guessed:</p>
-        <p id="guessBoard">You've missed 0!</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button" onclick="gameStart()">Start the Game!</a>
+        <div class="container">
+            <div class="row">
+                <h1 class="display-4 mb-3">Let's play Hangman!</h1>
+            </div>
+            <div class="row">
+                <h4 id="scoreBoard">Wins = 0 || Losses = 0</h4>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <img src="assets/images/gallows.png" alt="hangman Gallows" id="gallows">
+                </div>
+                <div class="col-md-6">
+                    <p>Letters youved guessed:</p>
+                    <p id="guessBoard">You've missed 0!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="lead" id="playBoard"></p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <a class="btn btn-primary btn-lg" href="#" role="button" onclick="gameStart()">Start the Game!</a>
+        </div>
     </div>
 
     <!-- Optional JavaScript -->

@@ -13,8 +13,8 @@ var guessedLettersArray = [];
 //function that takes word 
 function getWord() {
     console.log("getWord start")
-    var word = prompt("OK enter a word.");
-    alert("Ok you chose " + word + " as your word!");
+    var word = prompt("OK enter a word. Don't let the other player see!");
+    alert("Ok you chose:   " + word);
     word = word.toLowerCase();
     return word;
 }
@@ -51,9 +51,13 @@ function upDateBoard() {
     }
     text += "</ul>";
 
-    document.getElementById("directions").innerHTML = text;
+    document.getElementById("playBoard").innerHTML = text;
 }
 
+function upDateScoreBoard() {
+    text = "Wins = " + wins + " || Losses = " + losses;
+    document.getElementById("scoreBoard").innerHTML = text;
+}
 
 //when guesses = 6 ends game.
 function checkLoss() {
@@ -81,7 +85,7 @@ function winCheck() {
 
 //alert that you won!
 function victoryAlert() {
-    alert("Congrats you guessed " + word + "correctly!!");
+    alert("Congrats you guessed " + word + " correctly!!");
     wins++;
 }
 
@@ -98,10 +102,36 @@ function showGuessLetters() {
     document.getElementById("guessBoard").innerHTML = text;
 }
 
+//this changes the picture
+function changeGallows() {
+    if (guesses === 1) {
+        document.getElementById("gallows").src = "assets/images/one.png";
+    }
+    else if (guesses === 2) {
+        document.getElementById("gallows").src = "assets/images/two.png";
+    }
+    else if (guesses === 3) {
+        document.getElementById("gallows").src = "assets/images/three.png";
+    }
+    else if (guesses === 4) {
+        document.getElementById("gallows").src = "assets/images/four.png";
+    }
+    else if (guesses === 5) {
+        document.getElementById("gallows").src = "assets/images/five.png";
+    }
+    else if (guesses === 6) {
+        document.getElementById("gallows").src = "assets/images/six.png";
+    }
+    else {
+        document.getElementById("gallows").src = "assets/images/gallows.png";
+    }
+
+}
+
 // the meat of the game, takes user guess and tests if its correct or not, then loads into arrays
 function letterGuess() {
     console.log("letterGuess start");
-    alert("Pick first guess!");
+    alert("Ok press the key of the letter you want to guess! Hint: the word is " + wordLength + " letters long. Guess wrong six times and you lose!");
 
     var letterTest = 1;
 
@@ -117,6 +147,7 @@ function letterGuess() {
                 if (gameOver === true) {
                     gameOverAlert();
                     showGuessLetters();
+                    upDateScoreBoard();
                 }
             }
             else {
@@ -131,10 +162,12 @@ function letterGuess() {
                 if (victory === true) {
                     upDateBoard();
                     victoryAlert();
+                    upDateScoreBoard();
                 }
             }
             upDateBoard();
             showGuessLetters();
+            changeGallows();
             console.log(guesses);
             console.log(guessedLettersArray);
         }
@@ -151,6 +184,8 @@ function gameStart() {
     gameOver = false;
     guesses = 0;
     guessedLettersArray = [];
+
+    changeGallows();
 
     showGuessLetters();
 
