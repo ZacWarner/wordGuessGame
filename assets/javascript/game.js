@@ -67,10 +67,23 @@ function checkLoss() {
     }
 }
 
-// //check if they have won
-// function windCheck() {
+//check if they have won
+function winCheck() {
+    var str = boardArray.join('');
+    if (str === word) {
+        victory = true;
+        console.log("victory = " + victory);
+    }
+    else {
+        return;
+    }
+}
 
-// }
+//alert that you won!
+function victoryAlert() {
+    alert("Congrats you guessed " + word + "correctly!!");
+    wins++;
+}
 
 //alerts user they lost.
 function gameOverAlert() {
@@ -96,7 +109,7 @@ function letterGuess() {
         var userGuess = event.key;
         console.log(userGuess);
         letterTest = wordArray.indexOf(userGuess);
-        if (gameOver === false) {
+        if (gameOver === false || victory === false) {
             if (letterTest === -1) {
                 guesses++;
                 guessedLettersArray.push(userGuess + " ");
@@ -114,6 +127,11 @@ function letterGuess() {
                         wordArray[letterTest] = 0;
                     }
                 }
+                winCheck();
+                if (victory === true) {
+                    upDateBoard();
+                    victoryAlert();
+                }
             }
             upDateBoard();
             showGuessLetters();
@@ -129,7 +147,7 @@ function letterGuess() {
 
 //the gamestart that will call functions in correct order.
 function gameStart() {
-
+    victory = false;
     gameOver = false;
     guesses = 0;
     guessedLettersArray = [];
