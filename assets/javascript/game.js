@@ -1,14 +1,16 @@
-//variable declaration.
-var word;
+//variable declaration
+// var game = {
+var word = "string";
 var wordArray = [];
 var boardArray = [];
-var wordLength;
+var wordLength = 0;
 var guesses = 0;
 var wins = 0;
 var losses = 0;
 var gameOver = false;
 var victory = false;
 var guessedLettersArray = [];
+var supperHeroArray = ["ironman", "hulk", "captainamerica", "hawkeye", "blackwidow", "thor", "superman", "batman", "wonderwomen", "aquaman"];
 
 //function that takes word 
 function getWord() {
@@ -16,6 +18,13 @@ function getWord() {
     var word = prompt("OK enter a word. Don't let the other player see!");
     alert("Ok you chose:   " + word);
     word = word.toLowerCase();
+    return word;
+}
+
+function getRandomSuperHero() {
+    alert("the computer is going to pick a random superhero name!");
+    word = supperHeroArray[Math.floor(Math.random() * 10)];
+    console.log(word);
     return word;
 }
 
@@ -54,6 +63,7 @@ function upDateBoard() {
     document.getElementById("playBoard").innerHTML = text;
 }
 
+//updates the score board.
 function upDateScoreBoard() {
     text = "Wins = " + wins + " || Losses = " + losses;
     document.getElementById("scoreBoard").innerHTML = text;
@@ -139,17 +149,21 @@ function letterGuess() {
         var userGuess = event.key;
         console.log(userGuess);
         letterTest = wordArray.indexOf(userGuess);
+        //makes sure game hasn't ended.
         if (gameOver === false || victory === false) {
+            //checks if guess is in string
             if (letterTest === -1) {
                 guesses++;
                 guessedLettersArray.push(userGuess + " ");
                 checkLoss();
+                //checks if they lost.
                 if (gameOver === true) {
-                    gameOverAlert();
                     showGuessLetters();
                     upDateScoreBoard();
+                    gameOverAlert();
                 }
             }
+            //if letter is in string uses for loop to check for multiple letters.
             else {
                 for (var i = 0; i < wordLength; i++) {
                     letterTest = wordArray.indexOf(userGuess);
@@ -159,10 +173,11 @@ function letterGuess() {
                     }
                 }
                 winCheck();
+                //checks if they won on that guess then updates scoreboard
                 if (victory === true) {
                     upDateBoard();
-                    victoryAlert();
                     upDateScoreBoard();
+                    victoryAlert();
                 }
             }
             upDateBoard();
@@ -209,5 +224,35 @@ function gameStart() {
 
 }
 
+function gameStartSuperhero() {
+    victory = false;
+    gameOver = false;
+    guesses = 0;
+    guessedLettersArray = [];
+
+    changeGallows();
+
+    showGuessLetters();
+
+    word = getRandomSuperHero();
+    console.log(word);
+
+    wordLength = getLength();
+    console.log(wordLength);
+
+    wordIntoArray();
+    console.log(wordArray);
+
+    boardArray = setUpGame();
+    console.log(boardArray.toString());
+
+    upDateBoard();
+
+    letterGuess();
+
+
+
+}
+// };
 
 
