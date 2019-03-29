@@ -146,11 +146,12 @@ function letterGuess() {
     var letterTest = 1;
 
     document.onkeyup = function (event) {
-        var userGuess = event.key;
-        console.log(userGuess);
-        letterTest = wordArray.indexOf(userGuess);
-        //makes sure game hasn't ended.
         if (gameOver === false || victory === false) {
+            var userGuess = event.key;
+            console.log(userGuess);
+            letterTest = wordArray.indexOf(userGuess);
+            //makes sure game hasn't ended.
+            // if (gameOver === false || victory === false) {
             //checks if guess is in string
             if (letterTest === -1) {
                 guesses++;
@@ -158,9 +159,9 @@ function letterGuess() {
                 checkLoss();
                 //checks if they lost.
                 if (gameOver === true) {
+                    gameOverAlert();
                     showGuessLetters();
                     upDateScoreBoard();
-                    gameOverAlert();
                 }
             }
             //if letter is in string uses for loop to check for multiple letters.
@@ -175,9 +176,9 @@ function letterGuess() {
                 winCheck();
                 //checks if they won on that guess then updates scoreboard
                 if (victory === true) {
+                    victoryAlert();
                     upDateBoard();
                     upDateScoreBoard();
-                    victoryAlert();
                 }
             }
             upDateBoard();
