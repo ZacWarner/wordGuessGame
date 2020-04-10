@@ -133,7 +133,7 @@ function changeGallows() {
         document.getElementById("gallows").src = "assets/images/six.png";
     }
     else {
-        document.getElementById("gallows").src = "assets/images/gallows.png";
+        document.getElementById("gallows").src = "assets/images/Gallows.png";
     }
 
 }
